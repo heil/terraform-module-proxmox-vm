@@ -1,6 +1,8 @@
 bootcmd:
   - test -z "$(blkid ${mount_device})" && mkfs -t ${filesystem} ${mount_device}
   - mkdir -p ${mount_point}
+  - systemctl restart qemu-guest-agent
+  - systemctl enable qemu-guest-agent
 
 mounts:
   - [ "${mount_device}", "${mount_point}", "${filesystem}", "defaults,nofail", "0", "2" ]

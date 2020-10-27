@@ -15,6 +15,7 @@ repo_upgrade: none
 packages:
   - curl
   - wget
+  - qemu-guest-agent
 
 users:
   - name: administrator
