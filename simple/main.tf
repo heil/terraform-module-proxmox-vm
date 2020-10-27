@@ -103,7 +103,7 @@ resource "proxmox_vm_qemu" "virtual_machine" {
 
   # Setup the ip address using cloud-init.
   # Keep in mind to use the CIDR notation for the ip.
-  ipconfig0    = "ip=dhcp"
+  ipconfig0    = var.vm_ipconfig0
   nameserver   = var.dns_server
   searchdomain = var.domain_name
   sshkeys      = file(var.ssh_public_key)
