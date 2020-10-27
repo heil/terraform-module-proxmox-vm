@@ -1,6 +1,6 @@
 
 data "template_file" "cloudinit" {
-  template = file("${path.module}../templates/cloudinit.yml")
+  template = file("${path.module}/../templates/cloudinit.yml")
   vars = {
 
     hostname    = var.vm_name
@@ -22,7 +22,7 @@ data "template_cloudinit_config" "cloudinit" {
 
 resource "local_file" "template_cloudinit_out" {
   content  = data.template_cloudinit_config.cloudinit.rendered
-  filename = "${path.module}..//templates/cloudinit-out-${var.vm_name}.yml"
+  filename = "${path.module}/../templates/cloudinit-out-${var.vm_name}.yml"
 }
 
 # Transfer the file to the Proxmox Host
