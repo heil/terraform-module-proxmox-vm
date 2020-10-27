@@ -1,6 +1,6 @@
 # terraform-module-proxmox-vm
 
-## simple
+## simple and block
 
 Module `terraform-proxmox-virtual-machine` is a universal module that can be
 used to deploy proxmox virtual machines from a Linux-based template based off of a cloud img. Link: [Proxmox Cloud-Init Support](https://pve.proxmox.com/wiki/Cloud-Init_Support)
@@ -51,21 +51,46 @@ provider "proxmox" {
 }
 ```
 
+```
+terraform {
+  required_version = ">= 0.13"
+}
+```
+
+### type simple
 
 ```
-module "terraform-module-proxmox-vm/simple" {
-  source          = "../modules/terraform-module-proxmox-vm/simple"
-  template_name = "debian-10-cloudinit-template"
+module "deb-01-simple" {
+  source        = "git::https://github.com/heil/terraform-module-proxmox-vm//simple"
+  template_name = "ubuntu-2004-cloudinit-template"
 
-  vm_name = "deb-01-thomas"
+  vm_name = "deb-01-simple-terraform"
 
-    pve_user     = var.pve_user
-    pve_password = var.pm_password
-    pve_host     = var.pm_host
-
+  pve_user     = var.pve_user
+  pve_password = var.pm_password
+  pve_host     = var.pm_host
   vm_password  = "$6$$yzVX2JRM7tdY4JjJHmrumQZNz4qxf57zZ4K6pj/u2JYzWQEeGhHvbqugg789pGrOeBypCD1fNaz/ClY9BI2vJ/"
-
   qemu_agent   = 1
-  vm_ipconfig0 = "ip=192.168.54.122/24,gw=192.168.54.1"
+  vm_ipconfig0 = "ip=192.168.54.140/24,gw=192.168.54.1"
+}
+```
+
+### type block
+
+
+```
+module "deb-01-block" {
+  source        = "git::https://github.com/heil/terraform-module-proxmox-vm//block"
+  template_name = "ubuntu-2004-cloudinit-template"
+  vm_name       = "deb-01-block-terraform"
+
+  pve_user     = var.pve_user
+  pve_password = var.pm_password
+  pve_host     = var.pm_host
+  vm_password  = "$6$$yzVX2JRM7tdY4JjJHmrumQZNz4qxf57zZ4K6pj/u2JYzWQEeGhHvbqugg789pGrOeBypCD1fNaz/ClY9BI2vJ/"
+  qemu_agent   = 1
+  vm_ipconfig0 = "ip=192.168.54.142/24,gw=192.168.54.1"
+
+  data_disk_mount = "/data/mariadb"
 }
 ```
