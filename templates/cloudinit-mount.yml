@@ -1,0 +1,6 @@
+bootcmd:
+  - test -z "$(blkid ${mount_device})" && mkfs -t ${filesystem} ${mount_device}
+  - mkdir -p ${mount_point}
+
+mounts:
+  - [ "${mount_device}", "${mount_point}", "${filesystem}", "defaults,nofail", "0", "2" ]
