@@ -10,7 +10,7 @@ manage_etc_hosts: true
 
 package_update: true
 
-repo_upgrade: none
+repo_upgrade: true
 
 packages:
   - curl
