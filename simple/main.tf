@@ -37,7 +37,7 @@ resource "null_resource" "cloudinit" {
 
   provisioner "file" {
     source      = local_file.template_cloudinit_out.filename
-    destination = "/var/lib/vz/snippets/cloudinit-out-${var.vm_name}.yml"
+    destination = "${var.snippet_path}/snippets/cloudinit-out-${var.vm_name}.yml"
   }
 
   depends_on = [
@@ -88,7 +88,7 @@ resource "proxmox_vm_qemu" "virtual_machine" {
 
   lifecycle {
     ignore_changes = [
-      network, cipassword
+      network, cipassword, nameserver, searchdomain
     ]
   }
 
@@ -99,7 +99,7 @@ resource "proxmox_vm_qemu" "virtual_machine" {
     bridge = var.network_bridge
   }
 
-  cicustom = "user=local:snippets/cloudinit-out-${var.vm_name}.yml"
+  cicustom = "user=${var.snippet_store}:snippets/cloudinit-out-${var.vm_name}.yml"
 
   # Setup the ip address using cloud-init.
   # Keep in mind to use the CIDR notation for the ip.

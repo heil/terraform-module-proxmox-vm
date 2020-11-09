@@ -16,6 +16,18 @@ variable "resource_pool" {
   description = "A logical group of containers and VMs "
 }
 
+variable "snippet_path" {
+  type        = string
+  default     = "/var/lib/vz/snippets"
+  description = "snippet-path"
+}
+
+variable "snippet_store" {
+  type        = string
+  default     = "local"
+  description = "snippet-path"
+}
+
 variable "template_name" {
   type        = string
   description = "The template to clone from. Refer to Create Template.sh for creating a template."
