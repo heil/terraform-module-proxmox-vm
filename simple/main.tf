@@ -76,14 +76,13 @@ resource "proxmox_vm_qemu" "virtual_machine" {
 
   # Setup the disk. The id has to be unique
   disk {
-    id           = 0
-    size         = var.disk_size
-    type         = "virtio"
-    format       = var.disk_format
-    storage      = var.datastore
-    storage_type = var.storage_type
-    iothread     = false
-    backup       = false
+    size    = var.disk_size
+    type    = "virtio"
+    format  = var.disk_format
+    storage = var.datastore
+    # storage_type = var.storage_type
+    iothread = false
+    backup   = false
   }
 
   lifecycle {
@@ -94,7 +93,7 @@ resource "proxmox_vm_qemu" "virtual_machine" {
 
   # Setup the network interface and assign a vlan tag: 256
   network {
-    id     = 0
+    # id     = "0"
     model  = "virtio"
     bridge = var.network_bridge
   }

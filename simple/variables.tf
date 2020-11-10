@@ -76,9 +76,9 @@ variable "disk_format" {
 }
 
 variable "disk_size" {
-  type        = number
-  description = "The main disk size in GB"
-  default     = 10
+  type        = string
+  description = "The main disk size in K M G"
+  default     = "10G"
 }
 
 variable "ssh_public_key" {

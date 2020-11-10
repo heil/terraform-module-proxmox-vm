@@ -1,5 +1,20 @@
 # terraform-module-proxmox-vm
 
+## Linux AMD64 Install
+
+Iam hoping we get the first stable binary release so we can stop
+building the source code.
+...
+
+```
+cd /tmp
+git clone https://github.com/heil/terraform-module-proxmox-vm.git
+cd terraform-module-proxmox-vm
+PLUGIN_ARCH=linux_amd64
+mkdir -p ~/.terraform.d/plugins/registry.example.com/telmate/proxmox/1.0.0/$PLUGIN_ARCH
+cp ./bin/linux_amd64/* ~/.terraform.d/plugins/registry.example.com/telmate/proxmox/1.0.0/$PLUGIN_ARCH
+```
+
 ## simple and block
 
 Module `terraform-proxmox-virtual-machine` is a universal module that can be
